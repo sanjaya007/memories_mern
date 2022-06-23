@@ -4,6 +4,7 @@ const cors = require("cors");
 require("./db/conn");
 const dotenv = require("dotenv");
 const postRoutes = require("./router/posts");
+const userRoutes = require("./router/user");
 
 const app = express();
 dotenv.config();
@@ -14,6 +15,9 @@ app.use(cors());
 
 //routes
 app.use("/posts", postRoutes);
+app.use("/user", userRoutes);
+
+console.log(new Date());
 
 const port = process.env.PORT || 8000;
 app.listen(port, () => {
