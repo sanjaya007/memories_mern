@@ -17,7 +17,6 @@ app.use(cors());
 app.use("/posts", postRoutes);
 app.use("/user", userRoutes);
 
-console.log(new Date());
 
 const port = process.env.PORT || 8000;
 app.listen(port, () => {

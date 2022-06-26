@@ -6,7 +6,7 @@ const UserModel = require("../models/user");
 const signup = async (req, res) => {
   const { firstName, lastName, email, password, confirmPassword } = req.body;
   try {
-    const existingUser = await User.findOne({ email });
+    const existingUser = await UserModel.findOne({ email });
 
     if (existingUser)
       return res.status(404).json({ message: "User already exists." });
@@ -30,6 +30,7 @@ const signup = async (req, res) => {
 
     res.status(200).json({ result, token });
   } catch (error) {
+    console.log(error);
     res.status(500).json({ message: "Something went wrong !" });
   }
 };
@@ -37,7 +38,7 @@ const signup = async (req, res) => {
 const signin = async (req, res) => {
   const { email, password } = req.body;
   try {
-    const existingUser = await User.findOne({ email });
+    const existingUser = await UserModel.findOne({ email });
 
     if (!existingUser)
       return res.status(404).json({ message: "User doesn't exist" });
@@ -58,6 +59,7 @@ const signin = async (req, res) => {
 
     res.status(200).json({ result: existingUser, token });
   } catch (error) {
+    console.log(error);
     res.status(500).json({ message: "Something went wrong !" });
   }
 };
