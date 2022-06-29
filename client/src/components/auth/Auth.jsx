@@ -34,6 +34,9 @@ const Auth = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
+  const user = JSON.parse(localStorage.getItem("profile"));
+  if (user) history.push("/");
+
   useEffect(() => {
     function gapiStart() {
       gapi.client.init({

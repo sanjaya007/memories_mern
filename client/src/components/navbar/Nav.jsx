@@ -5,6 +5,7 @@ import img from "../../../src/images/img1.svg";
 import { useDispatch } from "react-redux";
 import useStyles from "./styles";
 import { useEffect } from "react";
+import decode from "jwt-decode";
 
 const Nav = () => {
   const classes = useStyles();
@@ -21,6 +22,13 @@ const Nav = () => {
 
   useEffect(() => {
     const token = user?.token;
+
+    if (token) {
+      const decodedToken = decode(token);
+
+      if (decodedToken.exp * 1000 < new Date().getTime()) logOut();
+    }
+
     setUser(JSON.parse(localStorage.getItem("profile")));
   }, [location]);
 
